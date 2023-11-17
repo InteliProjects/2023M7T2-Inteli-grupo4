@@ -1,0 +1,4 @@
+Agregação
+Seleção de acordo com o documento
+Exclusao de constantes
+Análise de outliers

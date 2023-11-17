@@ -1,0 +1,18 @@
+fastapi
+pandas
+uvicorn
+pyarrow
+fastparquet
+ormar==0.12.2
+psycopg2-binary==2.9.5
+asyncpg==0.28.0
+sqlalchemy
+passlib
+pydantic == 1.10.8
+pydantic[email]
+pycaret
+aiosqlite
+boto3
+pyjwt7== 2.8.0
+python-decouple
+psycopg2

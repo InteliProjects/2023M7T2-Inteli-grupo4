@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background-color: rgb(229, 229, 229);
+}
+
+
+.graphcs{
+  width: 90%;
+  margin-left: 6%;
+}
+
+.cardPadding{
+  padding: 4.5%;
+  filter: drop-shadow(6px 6px 16px rgba(0, 0, 0, 0.15));
+}
+
+
+.loginCard{
+  width: 30vw;
+}
+
+
+@media ( width <= 800px) {
+  .loginCard{
+    width: 80vw;
+  }
+}
+
+
+
+.btn_Access{
+  border: 1px solid rgb(59 130 246);
+  color: rgb(59 130 246);
+}
+
+
+
+.content{
+  display: grid;
+  height: 100px;
+  grid-template-columns: repeat(10, 10%);
+  grid-template-rows: 100px;
+}
+.itemContent{
+grid-column: span 8 / 11;
+}
+.itemBar{
+grid-column: span 2 / 3;
+
+}
+
+.line_color{
+  background-color: rgba(40, 47, 53, 0.192);
+}
+.bar{
+  width: 20vw;
+  border-right: 1px solid rgba(0, 0, 0, 0.20);
+}
+

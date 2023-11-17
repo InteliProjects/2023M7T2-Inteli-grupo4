@@ -1,0 +1,9 @@
+*.csv
+*.xls
+*.xlsx
+*.tsv
+*.parquet
+notebooks/logs.log
+front/front-app/node_modules
+*.parquet
+backend/app/logs.log

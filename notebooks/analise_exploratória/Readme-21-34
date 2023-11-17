@@ -1,0 +1,84 @@
+<h1 align="center"> Identificação de falhas sob os arquivos parquet </h1>
+
+O código Python que permite a análise de arquivos Parquet em busca de falhas em colunas específicas de dados. Sua principal função é identificar se dentro desses arquivos contêm valores de falha nas colunas "message0418DAA-1" e "message0422DAA-1". Para isso, foi utilizado a biblioteca ‘pandas’ para manipular os dados e a biblioteca ‘os’ para iterar sobre os arquivos em um diretório específico. Assim, facilitando a personalização dos valores que indicam falhas, tornando-o potencialmente flexível para distintos cenários de análise de dados.
+<br> 
+
+    Para aplicar a utilização do código, siga os seguintes passos: 
+
+    - Verifique se a configuração do diretório, altera para a variável ‘path_21’, para assim obter o caminho correto. 
+
+    - Defina os valores que indicam falhas nas colunas "message0418DAA-1" e "message0422DAA-1" na lista valores_de_falha.
+  
+    - Após isso, execute o código.
+<br>
+
+Ao executar o código, os arquivos em que foram encontradas falhas serão listados na variável “arquivos_com_falhas”, enquanto que nos arquivos sem falhas serão armazenados na variável “arquivos_sem_falhas”. Os nomes desses arquivos serão exibidos no console para referência. O script é completamente flexível e pode ser facilmente personalizado para atender a possíveis novos requisitos específicos para uma atualização da aplicação.
+
+<br>
+
+
+```
+ # importações necessárias
+
+import os
+import pandas as pd
+import pyarrow
+```
+<br> 
+
+As importações necessárias para a execução deste código incluem três bibliotecas fundamentais. A primeira delas é a biblioteca 'os', que é utilizada para lidar com operações relacionadas ao sistema de arquivos, como listar arquivos em um diretório. A segunda é a biblioteca 'pandas', que desempenha um papel central na leitura e manipulação dos dados armazenados em formato Parquet. Por último, temos a biblioteca 'pyarrow’ que é usada em conjunto com 'pandas' para otimizar operações avançadas de leitura e escrita de dados em formatos como Parquet. 
+
+<br> 
+
+```
+# listando todos os parquets disponíveis da pasta
+
+path_21 = '..\\..\\modelagem\\06120021'
+arquivos_modelagem_21 = os.listdir(path_21)
+print(arquivos_modelagem)
+
+```
+<br> 
+Neste trecho, há uma listagem de todos os arquivos no formato Parquet disponíveis na pasta. Primeiro, é definido o caminho path_21 para o diretório que contém os arquivos que serão analisados. Em seguida,  a função os.listdir() é utilizada para criar uma lista que contém os nomes de todos os arquivos nesse diretório. Essa lista é atribuída à variável 'arquivos_modelagem_21'. Finalmente, há a impressão dos nomes dos arquivos no console para que assim seja possível usá-los como referências. 
+
+<br> 
+
+```
+arquivos_sem_falhas = []
+
+
+valores_de_falha = [3.0, 4.0]# Valores que indicam falhas nas colunas 'message0418DAA-1' e 'message0422DAA-1'
+
+
+# Loop através dos arquivos na pasta
+for filename in os.listdir(path_21):
+    if filename.endswith(".parquet"):
+        file_path = os.path.join(path, filename)
+       
+        # Leia o arquivo Parquet em um DataFrame
+        df_flight_data = pd.read_parquet(file_path)
+       
+        # Verifique se o DataFrame contém algum sinal de falha
+        if any(df_flight_data['message0418DAA-1'].isin(valores_de_falha)) or any(df_flight_data['message0422DAA-1'].isin(valores_de_falha)):
+            arquivos_com_falhas.append(filename)
+        else:
+            arquivos_sem_falhas.append(filename)
+
+
+# Imprima os nomes dos arquivos com falhas
+print("Arquivos com falhas:")
+for arquivo in arquivos_com_falhas:
+    print(arquivo)
+
+
+# Imprima os nomes dos arquivos sem falhas
+print("\nArquivos sem falhas:")
+for arquivo in arquivos_sem_falhas:
+    print(arquivo)
+
+```
+<br> 
+
+Neste trecho de código, foi implementada uma análise de arquivos Parquet em busca de falhas nas colunas 'message0418DAA-1' e 'message0422DAA-1'. Primeiro, definimos uma lista chamada 'valores_de_falha', que contém os valores que indicam falhas nessas colunas. Em seguida, após percorrer todos os arquivos no diretório especificado pelo caminho 'path_21'. Para cada arquivo que possui a extensão ".parquet", o código lê o arquivo em um DataFrame usando a biblioteca 'pandas'. Após isso, ele verifica se o DataFrame contém algum dos valores de falha especificados nas colunas mencionadas. Se algum valor de falha for encontrado, o nome do arquivo é adicionado à lista 'arquivos_com_falhas'; caso contrário, o nome do arquivo é adicionado à lista 'arquivos_sem_falhas'. Finalmente, o código imprime os nomes dos arquivos com falhas e sem falhas no console.
+
+<br>
